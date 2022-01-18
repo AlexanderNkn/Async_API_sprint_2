@@ -1,23 +1,19 @@
-from typing import Optional, Union
+from typing import Optional
 
+import elasticsearch.exceptions
 from aioredis import Redis
 from elasticsearch import AsyncElasticsearch
-import elasticsearch.exceptions
-
 from orjson import loads as orjson_loads
+
 from models.base import orjson_dumps
-from models.film import FilmDetailedDTO
-from models.genre import GenreDetailedDTO
-from models.person import PersonDetailedDTO
+from services.AbstractClasses import AbstractElastic, T
 
 from .utils import get_body
-
-T = Union[FilmDetailedDTO, GenreDetailedDTO, PersonDetailedDTO]
 
 OBJ_CACHE_EXPIRE_IN_SECONDS = 60 * 5  # 5 минут
 
 
-class BaseService:
+class BaseService(AbstractElastic):
     def __init__(self, index: str, model: T, elastic: AsyncElasticsearch, redis: Redis) -> None:
         self.index = index
         self.model = model

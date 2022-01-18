@@ -2,8 +2,8 @@ import uuid
 from typing import Optional
 
 from .base import BaseModel
-from .genre import GenreShortResponse, GenreShortDTO
-from .person import PersonShortResponse, PersonShortDTO
+from .genre import GenreShortDTO, GenreShortResponse
+from .person import PersonShortDTO, PersonShortResponse
 
 
 class FilmShortResponse(BaseModel):
